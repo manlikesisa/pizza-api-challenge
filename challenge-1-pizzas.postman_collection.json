@@ -1,0 +1,66 @@
+GET /restaurants
+URL: http://127.0.0.1:5000/restaurants
+
+ GET /restaurants/<id>
+URL: http://127.0.0.1:5000/restaurants/1
+(Replace 1 with a real restaurant ID)
+Method: GET
+Expected error (if not found): { "error": "Restaurant not found" }
+
+
+ DELETE /restaurants/<id>
+URL: http://127.0.0.1:5000/restaurants/1
+Method: DELETE
+Usage: Delete a restaurant
+Expected response:
+
+204 No Content (Success)
+
+or:
+
+json
+Copy code
+{ "error": "Restaurant not found" }
+
+🔹 GET /pizzas
+URL: http://127.0.0.1:5000/pizzas
+Method: GET
+
+
+🔹 POST /restaurant_pizzas
+URL: http://127.0.0.1:5000/restaurant_pizzas
+Method: POST
+Body → raw → JSON:
+
+json
+Copy code
+{
+  "price": 5,
+  "pizza_id": 1,
+  "restaurant_id": 3
+}
+Success response:
+
+json
+Copy code
+{
+  "id": 4,
+  "price": 5,
+  "pizza_id": 1,
+  "restaurant_id": 3,
+  "pizza": {
+    "id": 1,
+    "name": "Emma",
+    "ingredients": "Dough, Tomato Sauce, Cheese"
+  },
+  "restaurant": {
+    "id": 3,
+    "name": "Kiki's Pizza",
+    "address": "address3"
+  }
+}
+Error response (invalid price):
+
+json
+Copy code
+{ "errors": ["Price must be between 1 and 30"] }
